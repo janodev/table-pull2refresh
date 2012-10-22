@@ -2,7 +2,7 @@
 
 To add the "pull to refresh" feature to a naked UITableViewController, 
 set its superclass to PullToRefreshVC or PullToRefreshFoldVC. This is the class hierarchy:
-<pre>
+<pre> 
 TableVC                           - Naked table controller.
     PullToRefreshVC               - Adds pull to refresh view.
         PullToRefreshFoldVC       - Adds a folding animation for the pull to refresh view.
