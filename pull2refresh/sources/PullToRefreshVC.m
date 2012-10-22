@@ -62,7 +62,7 @@
     dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC);
     dispatch_after(delay, dispatch_get_main_queue(), ^{
         
-        // set the refresh date
+        // set the refresh date 
         static dispatch_once_t onceToken;
         static NSDateFormatter *dateFormatter;
         dispatch_once(&onceToken, ^{

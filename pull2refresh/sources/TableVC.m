@@ -38,10 +38,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath
 {
-	dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 0.1*NSEC_PER_SEC);
-	dispatch_after(delay, dispatch_get_main_queue(), ^{
+    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 0.1*NSEC_PER_SEC);
+    dispatch_after(delay, dispatch_get_main_queue(), ^{
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-	});
+    });
 }
 
 #pragma mark - UIViewController
