@@ -10,7 +10,7 @@
 @end
 
 
-@implementation PullToRefreshVC 
+@implementation PullToRefreshVC
 
 
 // Change the arrow and text of the "pull to refresh" view when the user pulls down.
@@ -60,18 +60,18 @@
     
     // 3 seconds delay to simulate a refresh
     dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC);
-	dispatch_after(delay, dispatch_get_main_queue(), ^{
+    dispatch_after(delay, dispatch_get_main_queue(), ^{
         
         // set the refresh date
-	    static dispatch_once_t onceToken;
+        static dispatch_once_t onceToken;
         static NSDateFormatter *dateFormatter;
-	    dispatch_once(&onceToken, ^{
-	        dateFormatter = [[NSDateFormatter alloc] init];
+        dispatch_once(&onceToken, ^{
+            dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
             NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
             [dateFormatter setLocale:usLocale];
-	    });
+        });
         _pullView.bottomLabel.text = [NSString stringWithFormat:@"%@: %@.",
                                       NSLocalizedString(@"last.updated",nil),
                                       [dateFormatter stringFromDate:[NSDate date]]];
@@ -84,13 +84,13 @@
         self.isRefreshing = FALSE;
         
         // hide the inset
-		[UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             [self.tableView setContentInset:UIEdgeInsetsZero];
         }completion:^(BOOL finished) {
             _pullView.bottomArrow.hidden = false;
         }];
         
-	});
+    });
 }
 
 
@@ -108,8 +108,8 @@
     
     // table background
     self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
-	[self.backgroundView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
-	[self.tableView insertSubview:self.backgroundView belowSubview:_pullView];
+    [self.backgroundView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+    [self.tableView insertSubview:self.backgroundView belowSubview:_pullView];
 }
 
 
