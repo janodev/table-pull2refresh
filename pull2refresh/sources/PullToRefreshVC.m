@@ -29,7 +29,7 @@
         }];
         
         // update the text
-        _pullView.topLabel.text = isFullyVisible ? @"Release to refresh" : @"Pull down to refresh";
+        _pullView.topLabel.text = isFullyVisible ? NSLocalizedString(@"release.to.refresh", nil) : NSLocalizedString(@"pull.to.refresh", nil);
     }
 }
 
@@ -40,7 +40,7 @@
     self.isRefreshing = TRUE;
     
     // change text, show the refreshing arrow, hide the "pull up/down" arrow
-    _pullView.topLabel.text = @"Refreshing...";
+    _pullView.topLabel.text = NSLocalizedString(@"refreshing",nil);
     _pullView.topArrow.hidden = false;
     _pullView.bottomArrow.hidden = true;
     
@@ -72,7 +72,9 @@
             NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
             [dateFormatter setLocale:usLocale];
 	    });
-        _pullView.bottomLabel.text = [NSString stringWithFormat:@"Last updated: %@",[dateFormatter stringFromDate:[NSDate date]] ];
+        _pullView.bottomLabel.text = [NSString stringWithFormat:@"%@: %@.",
+                                      NSLocalizedString(@"last.updated",nil),
+                                      [dateFormatter stringFromDate:[NSDate date]]];
         
         // hide top arrow, remove animation, and restore angle
         _pullView.topArrow.hidden = true;
@@ -100,7 +102,7 @@
     // add the "pull to refresh" view above the table
     CGRect rect = CGRectMake(0, -kPullViewHeight, self.view.frame.size.width, kPullViewHeight);
     _pullView = [[PullView alloc] initWithFrame:rect];
-    _pullView.bottomLabel.text = @"Last updated: never";
+    _pullView.bottomLabel.text = [NSString stringWithFormat:@"%@: %@.", NSLocalizedString(@"last.updated",nil), NSLocalizedString(@"never",nil)];
     _pullView.backgroundColor = [UIColor yellowColor];
     [self.tableView addSubview:_pullView];
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A6AFF28163552C200D21A7F /* PullToRefreshFoldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6AFF27163552C200D21A7F /* PullToRefreshFoldVC.m */; };
+		3A6AFF2D16355DBE00D21A7F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6AFF2B16355DBE00D21A7F /* Localizable.strings */; };
 		3A70B71E1633F33A004FF4B4 /* PullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B71D1633F33A004FF4B4 /* PullView.m */; };
 		3A70B7211634148E004FF4B4 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A70B7201634148E004FF4B4 /* MainStoryboard.storyboard */; };
 		3A70B7231634149C004FF4B4 /* refresh-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A70B7221634149C004FF4B4 /* refresh-arrow.png */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		3A6AFF26163552C200D21A7F /* PullToRefreshFoldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshFoldVC.h; sourceTree = "<group>"; };
 		3A6AFF27163552C200D21A7F /* PullToRefreshFoldVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshFoldVC.m; sourceTree = "<group>"; };
+		3A6AFF2C16355DBE00D21A7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		3A70B71C1633F33A004FF4B4 /* PullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullView.h; sourceTree = "<group>"; };
 		3A70B71D1633F33A004FF4B4 /* PullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullView.m; sourceTree = "<group>"; };
 		3A70B7201634148E004FF4B4 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A6AFF2A16355DBE00D21A7F /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3A6AFF2B16355DBE00D21A7F /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		3A81A43C16210094009AA3D4 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +145,7 @@
 		3ABF7B461621322100282624 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A6AFF2A16355DBE00D21A7F /* en.lproj */,
 				3A70B72916342B76004FF4B4 /* down-arrow@2x.png */,
 				3A70B72A16342B76004FF4B4 /* down-arrow.png */,
 				3A70B72416341596004FF4B4 /* refresh-arrow@2x.png */,
@@ -246,6 +257,7 @@
 				3A70B72516341596004FF4B4 /* refresh-arrow@2x.png in Resources */,
 				3A70B72B16342B76004FF4B4 /* down-arrow@2x.png in Resources */,
 				3A70B72C16342B76004FF4B4 /* down-arrow.png in Resources */,
+				3A6AFF2D16355DBE00D21A7F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +278,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3A6AFF2B16355DBE00D21A7F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6AFF2C16355DBE00D21A7F /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3A81A46C16210094009AA3D4 /* Debug */ = {

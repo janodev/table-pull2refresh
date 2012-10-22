@@ -20,12 +20,14 @@
         _topLabel.backgroundColor = [UIColor colorWithRed:0.877 green:0.684 blue:1.000 alpha:1.000];
         _topLabel.textAlignment = NSTextAlignmentCenter;
         _topLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        _topLabel.text = NSLocalizedString(@"pull.to.refresh",nil);
         
         frame = CGRectMake(0, halfHeight, frame.size.width, halfHeight);
         _bottomLabel = [[UILabel alloc] initWithFrame:frame];
         _bottomLabel.backgroundColor = [UIColor colorWithRed:0.675 green:0.862 blue:0.518 alpha:1.000];
         _bottomLabel.textAlignment = NSTextAlignmentCenter;
         _bottomLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        _bottomLabel.text = [NSString stringWithFormat:@"%@: never.",NSLocalizedString(@"last.updated",nil)];
         
         UIImage *icon = [UIImage imageNamed:@"refresh-arrow"];
         _topArrow = [[UIImageView alloc] initWithImage:icon];

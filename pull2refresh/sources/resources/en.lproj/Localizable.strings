@@ -1,0 +1,6 @@
+
+pull.to.refresh    = "Pull down to refresh";
+last.updated       = "Last updated";
+refreshing         = "Refreshing...";
+release.to.refresh = "Release to refresh";
+never              = "never";
