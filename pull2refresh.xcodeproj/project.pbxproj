@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A6AFF28163552C200D21A7F /* PullToRefreshFoldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6AFF27163552C200D21A7F /* PullToRefreshFoldVC.m */; };
 		3A70B71E1633F33A004FF4B4 /* PullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A70B71D1633F33A004FF4B4 /* PullView.m */; };
 		3A70B7211634148E004FF4B4 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A70B7201634148E004FF4B4 /* MainStoryboard.storyboard */; };
 		3A70B7231634149C004FF4B4 /* refresh-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A70B7221634149C004FF4B4 /* refresh-arrow.png */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A6AFF26163552C200D21A7F /* PullToRefreshFoldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshFoldVC.h; sourceTree = "<group>"; };
+		3A6AFF27163552C200D21A7F /* PullToRefreshFoldVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshFoldVC.m; sourceTree = "<group>"; };
 		3A70B71C1633F33A004FF4B4 /* PullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullView.h; sourceTree = "<group>"; };
 		3A70B71D1633F33A004FF4B4 /* PullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullView.m; sourceTree = "<group>"; };
 		3A70B7201634148E004FF4B4 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 				3A70B71D1633F33A004FF4B4 /* PullView.m */,
 				3A70B72D16344762004FF4B4 /* PullToRefreshVC.h */,
 				3A70B72E16344762004FF4B4 /* PullToRefreshVC.m */,
+				3A6AFF26163552C200D21A7F /* PullToRefreshFoldVC.h */,
+				3A6AFF27163552C200D21A7F /* PullToRefreshFoldVC.m */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				3ABF7B5B1621322100282624 /* main.m in Sources */,
 				3A70B71E1633F33A004FF4B4 /* PullView.m in Sources */,
 				3A70B72F16344762004FF4B4 /* PullToRefreshVC.m in Sources */,
+				3A6AFF28163552C200D21A7F /* PullToRefreshFoldVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,14 +17,12 @@
         
         frame = CGRectMake(0, 0, frame.size.width, halfHeight);
         _topLabel = [[UILabel alloc] initWithFrame:frame];
-        //_topLabel.text = @"last updated: whatever";
         _topLabel.backgroundColor = [UIColor colorWithRed:0.877 green:0.684 blue:1.000 alpha:1.000];
         _topLabel.textAlignment = NSTextAlignmentCenter;
         _topLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
         frame = CGRectMake(0, halfHeight, frame.size.width, halfHeight);
         _bottomLabel = [[UILabel alloc] initWithFrame:frame];
-        //_bottomLabel.text = @"pull to refresh";
         _bottomLabel.backgroundColor = [UIColor colorWithRed:0.675 green:0.862 blue:0.518 alpha:1.000];
         _bottomLabel.textAlignment = NSTextAlignmentCenter;
         _bottomLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -41,7 +39,6 @@
         padding = floorf((frame.size.height-icon.size.height)/2);
         _bottomArrow.frame = CGRectMake(padding, padding, icon.size.width, icon.size.height);
         [_bottomLabel addSubview:_bottomArrow];
-        
         
         [self addSubview:_topLabel];
         [self addSubview:_bottomLabel];

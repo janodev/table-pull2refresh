@@ -2,7 +2,7 @@
 // BSD License. Created by jano@jano.com.es
 
 #import "PullView.h"
-#import "PullToRefreshVC.h"
+#import "PullToRefreshFoldVC.h"
 
-@interface TableVC : PullToRefreshVC
+@interface TableVC : PullToRefreshFoldVC
 @end

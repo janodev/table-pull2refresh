@@ -4,5 +4,16 @@
 #import "PullView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface PullToRefreshVC : UITableViewController
+// height of the pull to refresh view above the table
+#define kPullViewHeight 64.0
+
+@interface PullToRefreshVC : UITableViewController {
+    PullView *_pullView;  // "pull to refresh" view above the table
+}
+
+/* The user pulled down the "pull to refresh" view.
+ * @param visibility Float going from 0 (not visible) to 1 (fully visible).
+ */
+-(void) didPullToVisibility:(CGFloat)visibility;
+
 @end

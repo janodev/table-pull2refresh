@@ -3,37 +3,33 @@
 
 #import "PullToRefreshVC.h"
 
-// height of the pull to refresh view above the table
-const CGFloat kPullViewHeight = 64.0;
-
 
 @interface PullToRefreshVC()
-@property (nonatomic, assign) BOOL isRefreshing;   // table is already refreshing
-@property (nonatomic, strong) PullView *pullView;  // "pull to refresh" view above the table
-@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, assign) BOOL isRefreshing;       // true when the table is refreshing
+@property (nonatomic, strong) UIView *backgroundView;  // background behind the table
 @end
 
 
-@implementation PullToRefreshVC
+@implementation PullToRefreshVC 
 
 
-// Updates the view (if needed) when the user pulls down.
-// This handles rotating the arrow and changing the text at the bottom.
--(void) didPullDown:(bool)isFullyVisible
+// Change the arrow and text of the "pull to refresh" view when the user pulls down.
+-(void) didPullToVisibility:(CGFloat)visibility
 {
-    static bool lastValue = false;
-    bool valueChanged = lastValue ^ isFullyVisible;
+    static bool wasFullyVisible = false;
+    bool isFullyVisible = floorf(visibility);
+    bool valueChanged = wasFullyVisible ^ isFullyVisible;
     if (valueChanged){
         
         // rotate the arrow up if the view is fully visible, or down otherwise
-        lastValue = isFullyVisible;
+        wasFullyVisible = isFullyVisible;
         [UIView animateWithDuration:0.2 animations:^{
-            CGFloat angle = (int)lastValue * M_PI; // value is 0 or PI
-            [self.pullView.bottomArrow layer].transform = CATransform3DMakeRotation(angle, 0, 0, 1);
+            CGFloat angle = (int)wasFullyVisible * M_PI; // value is 0 or PI
+            [_pullView.bottomArrow layer].transform = CATransform3DMakeRotation(angle, 0, 0, 1);
         }];
         
         // update the text
-        self.pullView.topLabel.text = isFullyVisible ? @"Release to refresh" : @"Pull down to refresh";
+        _pullView.topLabel.text = isFullyVisible ? @"Release to refresh" : @"Pull down to refresh";
     }
 }
 
@@ -44,9 +40,9 @@ const CGFloat kPullViewHeight = 64.0;
     self.isRefreshing = TRUE;
     
     // change text, show the refreshing arrow, hide the "pull up/down" arrow
-    self.pullView.topLabel.text = @"Refreshing...";
-    self.pullView.topArrow.hidden = false;
-    self.pullView.bottomArrow.hidden = true;
+    _pullView.topLabel.text = @"Refreshing...";
+    _pullView.topArrow.hidden = false;
+    _pullView.bottomArrow.hidden = true;
     
     // add an inset on top so the pullView above the table stays visible
     [UIView animateWithDuration:0.3 animations:^{
@@ -60,7 +56,7 @@ const CGFloat kPullViewHeight = 64.0;
     rotationAnimation.duration = 0.15f;
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = HUGE_VALF;
-    [self.pullView.topArrow.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [_pullView.topArrow.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     
     // 3 seconds delay to simulate a refresh
     dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC);
@@ -76,12 +72,12 @@ const CGFloat kPullViewHeight = 64.0;
             NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
             [dateFormatter setLocale:usLocale];
 	    });
-        self.pullView.bottomLabel.text = [NSString stringWithFormat:@"Last updated: %@",[dateFormatter stringFromDate:[NSDate date]] ];
+        _pullView.bottomLabel.text = [NSString stringWithFormat:@"Last updated: %@",[dateFormatter stringFromDate:[NSDate date]] ];
         
         // hide top arrow, remove animation, and restore angle
-        self.pullView.topArrow.hidden = true;
-        [self.pullView.topArrow.layer removeAllAnimations];
-        [self.pullView.topArrow layer].transform = CATransform3DMakeRotation(0, 0, 0, 1);
+        _pullView.topArrow.hidden = true;
+        [_pullView.topArrow.layer removeAllAnimations];
+        [_pullView.topArrow layer].transform = CATransform3DMakeRotation(0, 0, 0, 1);
         
         self.isRefreshing = FALSE;
         
@@ -89,7 +85,7 @@ const CGFloat kPullViewHeight = 64.0;
 		[UIView animateWithDuration:0.3 animations:^{
             [self.tableView setContentInset:UIEdgeInsetsZero];
         }completion:^(BOOL finished) {
-            self.pullView.bottomArrow.hidden = false;
+            _pullView.bottomArrow.hidden = false;
         }];
         
 	});
@@ -100,17 +96,18 @@ const CGFloat kPullViewHeight = 64.0;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-
-    // table background
-    self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
-	[self.backgroundView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
-	[self.tableView addSubview:self.backgroundView];
     
     // add the "pull to refresh" view above the table
     CGRect rect = CGRectMake(0, -kPullViewHeight, self.view.frame.size.width, kPullViewHeight);
-    self.pullView = [[PullView alloc] initWithFrame:rect];
-    self.pullView.bottomLabel.text = @"Last updated: never";
-    [self.tableView addSubview:self.pullView];
+    _pullView = [[PullView alloc] initWithFrame:rect];
+    _pullView.bottomLabel.text = @"Last updated: never";
+    _pullView.backgroundColor = [UIColor yellowColor];
+    [self.tableView addSubview:_pullView];
+    
+    // table background
+    self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+	[self.backgroundView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+	[self.tableView insertSubview:self.backgroundView belowSubview:_pullView];
 }
 
 
@@ -119,15 +116,12 @@ const CGFloat kPullViewHeight = 64.0;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // return if the pullView is not visible or already refreshing
-    bool hiddenPullView = scrollView.contentOffset.y>0;
-    if (hiddenPullView || self.isRefreshing) {
-        return;
+    // update the "pull to refresh" view if it is visible and not already refreshing
+    bool isVisible = scrollView.contentOffset.y<0;
+    if (isVisible && !self.isRefreshing) {
+        CGFloat visibility = MIN(1.0, scrollView.contentOffset.y/-kPullViewHeight);
+        [self didPullToVisibility:visibility];
     }
-    // update the pullView as the user animate while the view scrolls down
-    CGFloat visibleFraction = scrollView.contentOffset.y / -kPullViewHeight; // value is 0 to 1
-    bool isFullyVisible = floorf(visibleFraction);
-    [self didPullDown:isFullyVisible];
 }
 
 
