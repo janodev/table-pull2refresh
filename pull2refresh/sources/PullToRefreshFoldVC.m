@@ -48,6 +48,7 @@
     // About m34:
     //   http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreAnimation_guide/Articles/Layers.html#//apple_ref/doc/uid/TP40006082-SW9
     //   http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreAnimation_guide/Articles/Layers.html#//apple_ref/doc/uid/TP40006082-SW1
+    //   http://blog.massivehealth.com/post/18563684407/clear
     //   http://markpospesel.wordpress.com/2012/05/10/anatomy-of-a-folding-animation/
     //   https://itunes.apple.com/us/app/perspectivetest/id481006743
     //   http://milen.me/technical/core-animation-3d-model/
