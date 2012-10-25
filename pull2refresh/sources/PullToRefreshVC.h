@@ -4,9 +4,6 @@
 #import "PullView.h"
 #import <QuartzCore/QuartzCore.h>
 
-// height of the pull to refresh view above the table
-#define kPullViewHeight 64.0
-
 @interface PullToRefreshVC : UITableViewController {
     PullView *_pullView;  // "pull to refresh" view above the table
 }

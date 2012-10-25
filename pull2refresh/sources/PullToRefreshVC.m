@@ -29,7 +29,8 @@
         }];
         
         // update the text
-        _pullView.topLabel.text = isFullyVisible ? NSLocalizedString(@"release.to.refresh", nil) : NSLocalizedString(@"pull.to.refresh", nil);
+        _pullView.topLabel.text = isFullyVisible ? NSLocalizedString(@"pull2view.release.to.refresh", nil)
+                                                 : NSLocalizedString(@"pull2view.pull.to.refresh", nil);
     }
 }
 
@@ -40,13 +41,13 @@
     self.isRefreshing = TRUE;
     
     // change text, show the refreshing arrow, hide the "pull up/down" arrow
-    _pullView.topLabel.text = NSLocalizedString(@"refreshing",nil);
+    _pullView.topLabel.text = NSLocalizedString(@"pull2view.refreshing",nil);
     _pullView.topArrow.hidden = false;
     _pullView.bottomArrow.hidden = true;
     
     // add an inset on top so the pullView above the table stays visible
     [UIView animateWithDuration:0.3 animations:^{
-        [self.tableView setContentInset:UIEdgeInsetsMake(kPullViewHeight, 0, 0, 0)];
+        [self.tableView setContentInset:UIEdgeInsetsMake(_pullView.frame.size.height, 0, 0, 0)];
     }];
     
     // infinite rotation
@@ -69,11 +70,12 @@
             dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+            dateFormatter.dateFormat = @"HH:mm:ss";
             NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-            [dateFormatter setLocale:usLocale];
+            dateFormatter.locale = usLocale;
         });
-        _pullView.bottomLabel.text = [NSString stringWithFormat:@"%@: %@.",
-                                      NSLocalizedString(@"last.updated",nil),
+        _pullView.bottomLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                      NSLocalizedString(@"pull2view.last.updated",nil),
                                       [dateFormatter stringFromDate:[NSDate date]]];
         
         // hide top arrow, remove animation, and restore angle
@@ -100,10 +102,8 @@
     [super viewDidLoad];
     
     // add the "pull to refresh" view above the table
-    CGRect rect = CGRectMake(0, -kPullViewHeight, self.view.frame.size.width, kPullViewHeight);
-    _pullView = [[PullView alloc] initWithFrame:rect];
-    _pullView.bottomLabel.text = [NSString stringWithFormat:@"%@: %@.", NSLocalizedString(@"last.updated",nil), NSLocalizedString(@"never",nil)];
-    _pullView.backgroundColor = [UIColor yellowColor];
+    _pullView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([PullView class]) owner:[PullView new] options:nil] objectAtIndex:0];
+    _pullView.frame = CGRectOffset(_pullView.frame, 0, -_pullView.frame.size.height);
     [self.tableView addSubview:_pullView];
     
     // table background
@@ -121,7 +121,7 @@
     // update the "pull to refresh" view if it is visible and not already refreshing
     bool isVisible = scrollView.contentOffset.y<0;
     if (isVisible && !self.isRefreshing) {
-        CGFloat visibility = MIN(1.0, scrollView.contentOffset.y/-kPullViewHeight);
+        CGFloat visibility = MIN(1.0, scrollView.contentOffset.y/-_pullView.frame.size.height);
         [self didPullToVisibility:visibility];
     }
 }
@@ -130,7 +130,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     // refresh if the user dragged all the way down, unless it is already refreshing
-    bool isFullyVisible = scrollView.contentOffset.y < -kPullViewHeight;
+    bool isFullyVisible = scrollView.contentOffset.y < -_pullView.frame.size.height;
     if (isFullyVisible && !self.isRefreshing){
         [self refresh];
     }

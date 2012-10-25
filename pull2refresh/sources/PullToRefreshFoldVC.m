@@ -14,15 +14,17 @@
     // To imagine an object rotating in the x-axis, imagine the axis physically going through the object.
     // The end result is that the view starts rotated 90º in the x-axis, therefore not visible (assuming the edge shows as height 0),
     // and rotates to 0º where there is no change from what it would be a normal view.
-    [_pullView.bottomLabel.layer setTransform:CATransform3DMakeRotation((M_PI / 2) - asinf(visibility), 1, 0, 0)];
+    [_pullView.bottomView.layer setTransform:CATransform3DMakeRotation((M_PI / 2) - asinf(visibility), 1, 0, 0)];
     
     // this is rotating from 0º...90º + 270º, (270 is 180º*3/2) so that's 270º...360º, which is going to 0º in the opposite direction.
-    [_pullView.topLabel.layer setTransform:CATransform3DMakeRotation(asinf(visibility) + (((M_PI) * 3) / 2) , 1, 0, 0)];
+    [_pullView.topView.layer setTransform:CATransform3DMakeRotation(asinf(visibility) + (((M_PI) * 3) / 2) , 1, 0, 0)];
+    
+    const CGFloat kPullViewHeight = _pullView.frame.size.height;
     
     // decrease the origin.y from kRefreshViewHeight to 0
-    [_pullView.topLabel setFrame:CGRectMake(0, kPullViewHeight * (1 - visibility), self.view.bounds.size.width, kPullViewHeight / 2)];
+    [_pullView.topView setFrame:CGRectMake(0, kPullViewHeight * (1 - visibility), self.view.bounds.size.width, kPullViewHeight / 2)];
     
-    [_pullView.bottomLabel setFrame:CGRectMake(0, kPullViewHeight/2, self.view.bounds.size.width, kPullViewHeight / 2)];
+    [_pullView.bottomView setFrame:CGRectMake(0, kPullViewHeight/2, self.view.bounds.size.width, kPullViewHeight / 2)];
 }
 
 
@@ -37,8 +39,8 @@
     
     // Set the points where we apply the transformation
     // See http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreAnimation_guide/Articles/Layers.html#//apple_ref/doc/uid/TP40006082-SW9
-    _pullView.topLabel.layer.anchorPoint = CGPointMake(0.5, 0.0);    // middle top
-    _pullView.bottomLabel.layer.anchorPoint = CGPointMake(0.5, 1.0); // middle bottom
+    _pullView.topView.layer.anchorPoint = CGPointMake(0.5, 0.0);    // middle top
+    _pullView.bottomView.layer.anchorPoint = CGPointMake(0.5, 1.0); // middle bottom
     
     // Add perspective to every sublayer.
     CATransform3D transform = CATransform3DIdentity;

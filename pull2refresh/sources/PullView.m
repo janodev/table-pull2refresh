@@ -5,48 +5,11 @@
 
 @implementation PullView
 
-
-- (id)initWithFrame:(CGRect)frame
-{
-    frame = CGRectIntegral(frame);
-    
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        CGFloat halfHeight = frame.size.height/2;
-        
-        frame = CGRectMake(0, 0, frame.size.width, halfHeight);
-        _topLabel = [[UILabel alloc] initWithFrame:frame];
-        _topLabel.backgroundColor = [UIColor colorWithRed:0.877 green:0.684 blue:1.000 alpha:1.000];
-        _topLabel.textAlignment = NSTextAlignmentCenter;
-        _topLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        _topLabel.text = NSLocalizedString(@"pull.to.refresh",nil);
-        
-        frame = CGRectMake(0, halfHeight, frame.size.width, halfHeight);
-        _bottomLabel = [[UILabel alloc] initWithFrame:frame];
-        _bottomLabel.backgroundColor = [UIColor colorWithRed:0.675 green:0.862 blue:0.518 alpha:1.000];
-        _bottomLabel.textAlignment = NSTextAlignmentCenter;
-        _bottomLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        _bottomLabel.text = [NSString stringWithFormat:@"%@: never.",NSLocalizedString(@"last.updated",nil)];
-        
-        UIImage *icon = [UIImage imageNamed:@"refresh-arrow"];
-        _topArrow = [[UIImageView alloc] initWithImage:icon];
-        CGFloat padding = floorf((frame.size.height-icon.size.height)/2);
-        _topArrow.frame = CGRectMake(padding, padding, icon.size.width, icon.size.height);
-        _topArrow.hidden = true;
-        [_topLabel addSubview:_topArrow];
-        
-        icon = [UIImage imageNamed:@"down-arrow"];
-        _bottomArrow = [[UIImageView alloc] initWithImage:icon];
-        padding = floorf((frame.size.height-icon.size.height)/2);
-        _bottomArrow.frame = CGRectMake(padding, padding, icon.size.width, icon.size.height);
-        [_bottomLabel addSubview:_bottomArrow];
-        
-        [self addSubview:_topLabel];
-        [self addSubview:_bottomLabel];
-    }
-    
-    return self;
+-(void) awakeFromNib {
+    _topLabel.text = NSLocalizedString(@"pull2view.pull.to.refresh", nil);
+    _bottomLabel.text = [NSString stringWithFormat:@"%@: %@",
+                         NSLocalizedString(@"pull2view.last.updated", nil),
+                         NSLocalizedString(@"pull2view.last.updated.never",nil)];
 }
 
 @end

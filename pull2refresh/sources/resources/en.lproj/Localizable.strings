@@ -1,6 +1,6 @@
 
-pull.to.refresh    = "Pull down to refresh";
-last.updated       = "Last updated";
-refreshing         = "Refreshing...";
-release.to.refresh = "Release to refresh";
-never              = "never";
+pull2view.last.updated       = "Last updated";
+pull2view.last.updated.never = "never";
+pull2view.pull.to.refresh    = "Pull down to refresh";
+pull2view.release.to.refresh = "Release to refresh";
+pull2view.refreshing         = "Refreshing...";

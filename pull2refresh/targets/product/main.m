@@ -1,12 +1,5 @@
-//
-//  main.m
-//  MasterDetail
-//
-//  Created by Jano on 10/7/12.
-//  Copyright (c) 2012 Jano. All rights reserved.
-//
 
-#import <UIKit/UIKit.h>
+// BSD License. Created by jano@jano.com.es
 
 #import "AppDelegate.h"
 
