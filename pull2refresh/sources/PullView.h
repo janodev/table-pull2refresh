@@ -11,5 +11,4 @@
 @property (nonatomic,weak) IBOutlet UILabel *bottomLabel;
 @property (nonatomic,weak) IBOutlet UIImageView *bottomArrow;
 
-
 @end

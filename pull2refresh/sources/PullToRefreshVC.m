@@ -60,7 +60,7 @@
     [_pullView.topArrow.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     
     // 3 seconds delay to simulate a refresh
-    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC);
+    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 2*NSEC_PER_SEC);
     dispatch_after(delay, dispatch_get_main_queue(), ^{
         
         // set the refresh date 
@@ -98,9 +98,15 @@
 
 #pragma mark - UIViewController
 
+
 -(void) viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupPullToRefresh];
+}
+
+
+-(void) setupPullToRefresh
+{
     // add the "pull to refresh" view above the table
     _pullView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([PullView class]) owner:[PullView new] options:nil] objectAtIndex:0];
     _pullView.frame = CGRectOffset(_pullView.frame, 0, -_pullView.frame.size.height);
