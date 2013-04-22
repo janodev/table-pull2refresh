@@ -1,4 +1,3 @@
-
 // BSD License. Created by jano@jano.com.es
 
 #import "PullToRefreshFoldVC.h"
@@ -55,6 +54,7 @@
     //   https://itunes.apple.com/us/app/perspectivetest/id481006743
     //   http://milen.me/technical/core-animation-3d-model/
     //   http://www.songho.ca/opengl/gl_transform.html
+    //   http://stackoverflow.com/a/7596326/412916
     // enjoy!
 }
 
